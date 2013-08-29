@@ -28,21 +28,29 @@ class Parser
 
     public function findElement($pattern)
     {
-        $query = new Query($this->html);
-        $list = $query->execute($pattern);
-        if (!count($list)) {
-            return '';
+        try {
+            $query = new Query($this->html);
+            $list = $query->execute($pattern);
+            if (!count($list)) {
+                return null;
+            }
+            return $list->getDocument()->saveXml($list->rewind());
+        } catch (\Exception $e) {
+            return null;
         }
-        return $list->getDocument()->saveXml($list->rewind());
     }
 
     public function findElementAttribute($pattern, $attribute)
     {
-        $query = new Query($this->html);
-        $list = $query->execute($pattern);
-        if (!count($list)) {
+        try {
+            $query = new Query($this->html);
+            $list = $query->execute($pattern);
+            if (!count($list)) {
+                return null;
+            }
+            return $list->rewind()->getAttribute($attribute);
+        } catch (\Exception $e) {
             return null;
         }
-        return $list->rewind()->getAttribute($attribute);
     }
 }

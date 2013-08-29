@@ -40,5 +40,22 @@ class ParserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('#item', $parser->findElementAttribute('strong', 'data-src'));
     }
 
+    public function testFindElementsBroken()
+    {
+        $parser = new Parser(file_get_contents(__DIR__ . '/_files/broken.html'));
+        $this->assertEquals(array(), $parser->findElements('ul li')); 
+    }
+
+    public function testFindElementBroken()
+    {
+        $parser = new Parser(file_get_contents(__DIR__ . '/_files/broken.html'));
+        $this->assertNull($parser->findElement('ul li')); 
+    }
+
+    public function testFindElementAttributeBroken()
+    {
+        $parser = new Parser(file_get_contents(__DIR__ . '/_files/broken.html'));
+        $this->assertNull($parser->findElementAttribute('ul li', 'data-src')); 
+    }
 
 }

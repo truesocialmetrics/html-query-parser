@@ -8,14 +8,27 @@ class Parser
 
     public function __construct($html) 
     {
+        $this->setHtml($html);
+    }
+
+    public function setHtml($html)
+    {
+        $html = @mb_convert_encoding($html, 'UTF-8', mb_detect_encoding($html));
+        $html = @mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+        $html = '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' . $html;
         $this->html = $html;
+    }
+
+    public function getHtml()
+    {
+        return $this->html;
     }
 
     public function findElements($pattern)
     {
         try {
             $items = array();
-            $query = new Query($this->html);
+            $query = new Query($this->getHtml(), 'utf-8');
             $list = $query->execute($pattern);
             foreach ($list as $item) {
                 $items[] = $list->getDocument()->saveXml($item);
@@ -29,7 +42,7 @@ class Parser
     public function findElement($pattern)
     {
         try {
-            $query = new Query($this->html);
+            $query = new Query($this->getHtml(), 'utf-8');
             $list = $query->execute($pattern);
             if (!count($list)) {
                 return null;
@@ -43,7 +56,7 @@ class Parser
     public function findElementAttribute($pattern, $attribute)
     {
         try {
-            $query = new Query($this->html);
+            $query = new Query($this->getHtml(), 'utf-8');
             $list = $query->execute($pattern);
             if (!count($list)) {
                 return null;

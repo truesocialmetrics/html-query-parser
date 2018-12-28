@@ -1,8 +1,8 @@
 <?php
 namespace TweeHtml\Parser;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ParserTest extends PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
     public function testInit()
     {
@@ -36,13 +36,13 @@ class ParserTest extends PHPUnit_Framework_TestCase
     public function testFindElement()
     {
         $parser = new Parser(file_get_contents(__DIR__ . '/_files/list.html'));
-        $this->assertEquals('<li>A</li>', $parser->findElement('ul li')); 
+        $this->assertEquals('<li>A</li>', $parser->findElement('ul li'));
     }
 
     public function testFindElementNonExist()
     {
         $parser = new Parser(file_get_contents(__DIR__ . '/_files/list.html'));
-        $this->assertEquals('', $parser->findElement('strong')); 
+        $this->assertEquals('', $parser->findElement('strong'));
     }
 
     public function testFindElementAttribute()
@@ -54,19 +54,19 @@ class ParserTest extends PHPUnit_Framework_TestCase
     public function testFindElementsBroken()
     {
         $parser = new Parser(file_get_contents(__DIR__ . '/_files/broken.html'));
-        $this->assertEquals(array(), $parser->findElements('ul li')); 
+        $this->assertEquals(array(), $parser->findElements('ul li'));
     }
 
     public function testFindElementBroken()
     {
         $parser = new Parser(file_get_contents(__DIR__ . '/_files/broken.html'));
-        $this->assertNull($parser->findElement('ul li')); 
+        $this->assertNull($parser->findElement('ul li'));
     }
 
     public function testFindElementAttributeBroken()
     {
         $parser = new Parser(file_get_contents(__DIR__ . '/_files/broken.html'));
-        $this->assertNull($parser->findElementAttribute('ul li', 'data-src')); 
+        $this->assertNull($parser->findElementAttribute('ul li', 'data-src'));
     }
 
 }

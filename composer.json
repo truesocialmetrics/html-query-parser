@@ -1,8 +1,8 @@
 {
     "name": "truesocialmetrics/html-query-parser",
     "type": "library",
-    "description": "Html parser unility class for ZF2",
-    "keywords": ["html", "parser", "query", "zf3"],
+    "description": "Html parser utility class for Laminas",
+    "keywords": ["html", "parser", "query", "laminas"],
     "homepage": "https://github.com/truesocialmetrics/html-query-parser",
     "license": "MIT",
     "authors": [
@@ -14,8 +14,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-        "zendframework/zend-dom": "*"
+        "php": ">=7.4",
+        "laminas/laminas-dom": "*"
     },
     "autoload": {
         "psr-4": {

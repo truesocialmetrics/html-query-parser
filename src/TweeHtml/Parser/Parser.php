@@ -1,12 +1,12 @@
 <?php
 namespace TweeHtml\Parser;
-use Zend\Dom\Query;
+use Laminas\Dom\Query;
 
 class Parser
 {
     protected $html = '';
 
-    public function __construct($html) 
+    public function __construct($html)
     {
         $this->setHtml($html);
     }
